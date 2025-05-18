@@ -1,22 +1,18 @@
 import openai
 import os
 
-openai.api_key = os.getenv("OPENAI_API_KEY")  # Set in your environment
+open.api_key = os.getenv("OPEN_API_KEY")
 
-def generate_response(prompt):
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": "You're a helpful agent for Barbeque Nation."},
-            {"role": "user", "content": prompt}
-        ]
-    )
-    return response['choices'][0]['message']['content'].strip()
+# Create a client instance (for SDK >= 1.0)
+client = openai.OpenAI()
 
-def get_openai_response(prompt, model="gpt-3.5-turbo"):
-    response = openai.ChatCompletion.create(
+def get_openai_response(messages, model="gpt-3.5-turbo"):
+    response = client.chat.completions.create(
         model=model,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.7,
+        messages=messages
     )
-    return response['choices'][0]['message']['content'].strip()
+    return response.choices[0].message.content
+
+def generate_response(prompt, model="gpt-3.5-turbo"):
+    messages = [{"role": "user", "content": prompt}]
+    return get_openai_response(messages, model=model)
