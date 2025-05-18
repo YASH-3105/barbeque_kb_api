@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template
+from prompt_templates import prompt_templates
 import json
 import os
 import re
@@ -23,6 +24,35 @@ except Exception as e:
 
 
 app = Flask(__name__)
+
+@app.route("/get_prompt", methods=["POST"])
+def get_prompt():
+    data = request.json
+    state = data.get("state")
+    variables = data.get("variables", {})
+
+    if state not in prompt_templates:
+        return jsonify({"error": "Invalid state"}), 400
+
+    prompt_data = prompt_templates[state]
+
+    # Fill in dynamic fields if needed
+    if state == "collect_contact_information":
+        step = prompt_data["steps"][0]
+        return jsonify({"prompt": step})
+    
+    elif state == "master_collect":
+        prompt = prompt_data["prompt"].format(**variables)
+        return jsonify({"prompt": prompt})
+    
+    elif state == "master_inform":
+        template = prompt_data["template"].format(**variables)
+        return jsonify({"prompt": template})
+
+    elif state == "collect_city":
+        return jsonify({"prompt": prompt_data["instructions"]})
+
+    return jsonify({"prompt": "Unknown state logic"}), 500
 
 @app.route("/")
 def home():
