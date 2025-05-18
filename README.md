@@ -41,7 +41,7 @@ Integrated a "Show Knowledge Base Chunks" toggle in the HTML UI to review curren
 - /kb/fallback – Fallback response (POST)
 
 *Example Query:*
-```bash
+
 curl -X POST https://barbeque-kb-api.onrender.com/kb/query \
 -H "Content-Type: application/json" \
 -d '{"query": "Do you serve Halal food?"}'
