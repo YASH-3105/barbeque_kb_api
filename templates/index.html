@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Barbeque Nation Knowledge Base</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #c0392b;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #c0392b;
+    }
+    pre {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-top: 20px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <h1>Barbeque Nation Knowledge Base</h1>
+  <p>Ask a question about Barbeque Nation (e.g., "What are the Jain options available?"):</p>
+
+  <textarea id="query" placeholder="Type your question here..."></textarea>
+  <br>
+  <button onclick="submitQuery()">Ask</button>
+
+  <h2>Response:</h2>
+  <pre id="response">No query sent yet.</pre>
+
+  <script>
+    async function submitQuery() {
+      const queryText = document.getElementById("query").value;
+      const responseBox = document.getElementById("response");
+
+      if (!queryText.trim()) {
+        responseBox.textContent = "Please enter a question.";
+        return;
+      }
+
+      responseBox.textContent = "Sending request...";
+
+      try {
+        const res = await fetch("https://barbeque-kb-api.onrender.com/kb/query", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ query: queryText })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          responseBox.textContent = data.message || "Error occurred.";
+        } else {
+          responseBox.textContent = JSON.stringify(data, null, 2);
+        }
+      } catch (err) {
+        responseBox.textContent = "Failed to contact API: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
