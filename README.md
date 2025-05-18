@@ -56,19 +56,48 @@ Logic defined in state_transition.py determines state shifts based on keyword pr
 
 ---
 
-4. Post-Call Analysis (Added Last Midnight)
+4. Post-Call Analysis
 
-Logged each user message and bot response into a persistent format (planned CSV/JSON).
+   In this, I have to build a Flask-based backend with Google sheets API integration:
+ - aceepts post-interaction data via API
+ - Logs into goggle sheet
 
-Prepared a simple /analyze endpoint to visualize or review past sessions (future enhancement).
+   Tech stack:
+   Python (Flask) for API backend
 
-Designed the foundation for analysis like:
+Google Sheets API for logging
 
-Response effectiveness
+OAuth2 credentials for Google integration
 
-FAQ coverage
+In data format I have taken an example 
+the written the python script
+after that , I did google sheet setup
+- Now, I setupt google sheets API by going to google cloud console, 
+creating new project , enabling the Google sheets API
+and now creating service account will give me the credentials.json file 
+then, I gave the editor access with service account after downloading credentials file
+then I integrated both 
 
-Booking completion rate
+- For testing it I run a code 
+curl -X POST http://localhost:5000/log_conversation \
+-H "Content-Type: application/json" \
+-d '{
+  "modality": "Call",
+  "call_time": "2025-01-03 12:50:07",
+  "phone_number": "9833620578",
+  "call_outcome": "ROOM_AVAILABILITY",
+  "room_name": "Executive Room",
+  "booking_date": "2025-01-03",
+  "booking_time": "15:30",
+  "number_of_guests": "2",
+  "customer_name": "Aryamann",
+  "call_summary": "User called to inquire about availability and wanted a booking voucher."
+}'
+  after clicking enter my data was logged into the sheet
+
+I have also attatched the screenshots of my work
+
+
 
 
 This data will be used to optimize prompts, KB content, and LLM temperature settings later.
