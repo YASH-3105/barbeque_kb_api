@@ -1,89 +1,159 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Barbeque Nation Knowledge Base</title>
+  <meta charset="UTF-8">
+  <title>Barbeque Nation Assistant</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px;
+      background-color: #f2f2f2;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .chat-container {
+      max-width: 600px;
+      margin: auto;
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .chat-box {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
       background-color: #f9f9f9;
     }
-    h1 {
-      color: #c0392b;
+
+    .chat-message {
+      margin: 5px 0;
     }
-    textarea {
-      width: 100%;
-      height: 80px;
+
+    .chat-message.user {
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .chat-message.bot {
+      text-align: left;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 80%;
       padding: 10px;
-      font-size: 16px;
+      margin-right: 5px;
     }
+
     button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      cursor: pointer;
+      padding: 10px 15px;
     }
-    button:hover {
-      background-color: #c0392b;
-    }
-    pre {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      padding: 15px;
+
+    .footer {
+      text-align: center;
       margin-top: 20px;
-      white-space: pre-wrap;
-      word-wrap: break-word;
+      font-size: 0.9em;
     }
+
+    .kb-toggle {
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+    }
+
+    .kb-section {
+      display: none;
+      max-width: 600px;
+      margin: 10px auto;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
   </style>
 </head>
 <body>
-  <h1>Barbeque Nation Knowledge Base</h1>
-  <p>Ask a question about Barbeque Nation (e.g., "What are the Jain options available?"):</p>
 
-  <textarea id="query" placeholder="Type your question here..."></textarea>
-  <br>
-  <button onclick="submitQuery()">Ask</button>
+<h1>Barbeque Nation Chat Assistant</h1>
 
-  <h2>Response:</h2>
-  <pre id="response">No query sent yet.</pre>
+<div class="chat-container">
+  <div id="chat-box" class="chat-box"></div>
+  <input type="text" id="user-input" placeholder="Ask something...">
+  <button onclick="sendMessage()">Send</button>
+</div>
 
-  <script>
-    async function submitQuery() {
-      const queryText = document.getElementById("query").value;
-      const responseBox = document.getElementById("response");
+<div class="footer">
+  <span class="kb-toggle" onclick="toggleKB()">Show Knowledge Base Chunks</span>
+</div>
 
-      if (!queryText.trim()) {
-        responseBox.textContent = "Please enter a question.";
-        return;
-      }
+<div class="kb-section" id="kb-section">
+  <button onclick="loadKB()">Reload KB Chunks</button>
+  <pre id="kb-content">Click to load KB chunks...</pre>
+</div>
 
-      responseBox.textContent = "Sending request...";
+<script>
+let sessionId = Math.random().toString(36).substring(2);
 
-      try {
-        const res = await fetch("https://barbeque-kb-api.onrender.com/kb/query", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ query: queryText })
-        });
+function addMessage(text, sender) {
+  const msg = document.createElement("div");
+  msg.classList.add("chat-message", sender);
+  msg.innerText = text;
+  document.getElementById("chat-box").appendChild(msg);
+  document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
+}
 
-        const data = await res.json();
+function sendMessage() {
+  const input = document.getElementById("user-input");
+  const userText = input.value.trim();
+  if (!userText) return;
 
-        if (!res.ok) {
-          responseBox.textContent = data.message || "Error occurred.";
-        } else {
-          responseBox.textContent = JSON.stringify(data, null, 2);
-        }
-      } catch (err) {
-        responseBox.textContent = "Failed to contact API: " + err.message;
-      }
-    }
-  </script>
+  addMessage(userText, "user");
+  input.value = "";
+
+  fetch("/chatbot", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      session_id: sessionId,
+      user_input: userText
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    const botReply = data.response || data.message || "No response.";
+    addMessage(botReply, "bot");
+  })
+  .catch(err => {
+    console.error(err);
+    addMessage("Error contacting chatbot.", "bot");
+  });
+}
+
+function toggleKB() {
+  const el = document.getElementById("kb-section");
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+
+function loadKB() {
+  fetch("/kb/all")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("kb-content").innerText = JSON.stringify(data, null, 2);
+    })
+    .catch(err => {
+      document.getElementById("kb-content").innerText = "Failed to load KB.";
+    });
+}
+</script>
+
 </body>
 </html>

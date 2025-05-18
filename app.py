@@ -3,6 +3,7 @@ from prompt_templates import prompt_templates
 from state_transition import get_current_state, set_current_state, determine_next_state
 from entity_extraction import extract_entities
 from openai_utils import get_openai_response,  generate_response
+from session_utils import get_current_state, update_session
 import json
 import os
 import re
@@ -27,6 +28,58 @@ except Exception as e:
 
 
 app = Flask(__name__)
+
+# In-memory session storage
+sessions = {}
+
+def get_current_state(session_id):
+    return sessions.get(session_id, {}).get("state", "collect_city")
+
+def update_session(session_id, state, variables):
+    if session_id not in sessions:
+        sessions[session_id] = {"state": state, "variables": {}}
+    sessions[session_id]["state"] = state
+    sessions[session_id]["variables"].update(variables)
+
+@app.route("/chatbot", methods=["POST"])
+def chatbot():
+    data = request.get_json()
+    session_id = data.get("session_id")
+    user_input = data.get("user_input")
+
+    if not session_id or not user_input:
+        return jsonify({"error": "session_id and user_input are required"}), 400
+
+    current_state = get_current_state(session_id)
+    variables = sessions.get(session_id, {}).get("variables", {})
+
+    # Fill template based on state
+    if current_state in prompt_templates:
+        prompt_info = prompt_templates[current_state]
+        if current_state == "collect_contact_information":
+            filled_prompt = prompt_info["steps"][0]
+        elif current_state == "master_collect":
+            filled_prompt = prompt_info["prompt"].format(**variables)
+        elif current_state == "master_inform":
+            filled_prompt = prompt_info["template"].format(**variables)
+        elif current_state == "collect_city":
+            filled_prompt = prompt_info["instructions"]
+        else:
+            filled_prompt = "How can I help you?"
+    else:
+        filled_prompt = "Hello! How can I assist you?"
+
+    # Get LLM response
+    llm_response = generate_response(filled_prompt)
+
+    # Transition to next state
+    next_state = determine_next_state(current_state, user_input)
+    update_session(session_id, next_state, variables)
+
+    return jsonify({
+        "response": llm_response,
+        "next_state": next_state
+    }), 200
 
 @app.route("/get_prompt", methods=["POST"])
 def get_prompt():
@@ -195,45 +248,23 @@ def fallback_response():
 print(app.url_map)
 
 @app.route("/chat", methods=["POST"])
-def chat_handler():
-    data = request.get_json()
-    user_input = data.get("query", "")
-    current_state = data.get("state", "")
-    collected_variables = data.get("variables", {})
+def chat():
+    data = request.json
+    session_id = data.get("session_id")
+    user_input = data.get("user_input")
 
-    if not current_state:
-        return jsonify({"error": "Current state is required"}), 400
-
-    # Step 1: Extract new entities from user input
-    new_entities = extract_entities(user_input, current_state)
-    collected_variables.update(new_entities)
-
-    # Step 2: Decide the next state based on current state and extracted entities
+    current_state = get_current_state(session_id)
     next_state = determine_next_state(current_state, user_input)
 
-    # Step 3: Fetch prompt template and fill in variables
-    if next_state not in prompt_templates:
-        return jsonify({"error": f"Unknown next state: {next_state}"}), 500
+    prompt_data = prompt_templates.get(next_state)
+    response_text = prompt_data["prompt"].format({"city": "Bangalore"})  # just an example
 
-    prompt_data = prompt_templates[next_state]
-    if next_state == "master_collect":
-        filled_prompt = prompt_data["prompt"].format(**collected_variables)
-    elif next_state == "master_inform":
-        filled_prompt = prompt_data["template"].format(**collected_variables)
-    else:
-        # For simple prompt types (like single instruction)
-        filled_prompt = prompt_data.get("instructions") or prompt_data.get("steps", [""])[0]
-
-    # Step 4: Optionally generate LLM response
-    llm_response = generate_response(filled_prompt)
+    update_session(session_id, next_state)
 
     return jsonify({
-        "next_state": next_state,
-        "variables": collected_variables,
-        "prompt": filled_prompt,
-        "response": llm_response
-    }), 200
-
+        "response": response_text,
+        "state": next_state
+    })
 
 
 if __name__ == "__main__":
