@@ -147,9 +147,7 @@ def fallback_response():
         "message": "This query appears to be outside my knowledge base. Please contact customer support or try a different question."
     }), 200
 
-@app.route("/")
-def home():
-    return "Knowledge Base API is running."
+
 
 print(app.url_map)
 
