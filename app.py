@@ -24,6 +24,11 @@ except Exception as e:
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    print(">>> Serving index.htm")
+    return render_template("index.html")
+
 # Load knowledge base
 with open("kb_data.json", "r", encoding="utf-8") as f:
     kb_chunks = json.load(f)
@@ -148,9 +153,7 @@ def home():
 
 print(app.url_map)
 
-@app.route("/")
-def home():
-    return render_template("index.html")
+
 
 if __name__ == "__main__":
     print(">>> Flask App is launching")
