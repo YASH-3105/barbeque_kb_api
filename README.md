@@ -29,6 +29,24 @@ Stored the KB as structured JSON and supported retrieval in the frontend for tra
 
 Integrated a "Show Knowledge Base Chunks" toggle in the HTML UI to review current data used by the chatbot.
 
+### Knowledge Base API – Barbeque Nation
+
+*Base URL:* https://barbeque-kb-api.onrender.com
+
+*Endpoints:*
+- /kb/all – Get all knowledge chunks (GET)
+- /kb/chunk/<chunk_id> – Get chunk by ID (GET)
+- /kb/search – Search chunks by keyword (POST)
+- /kb/query – Smart query routing (POST)
+- /kb/fallback – Fallback response (POST)
+
+*Example Query:*
+```bash
+curl -X POST https://barbeque-kb-api.onrender.com/kb/query \
+-H "Content-Type: application/json" \
+-d '{"query": "Do you serve Halal food?"}'
+
+
 
 
 ---
@@ -121,6 +139,7 @@ Live display of LLM replies
 Toggle to review current knowledge base chunks
 
 
-here is my deployed link
+here is my deployed link of chatbot
+
 https://barbeque-kb-api.onrender.com
 
