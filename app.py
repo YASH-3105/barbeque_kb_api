@@ -144,4 +144,4 @@ def fallback_response():
 
 if __name__ == "__main__":
     print(">>> Flask App is launching")
-    app.run(debug=True)
+    app.run(debug=False, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
