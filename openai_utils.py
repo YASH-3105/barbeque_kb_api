@@ -1,7 +1,7 @@
 import openai
 import os
 
-open.api_key = os.getenv("OPEN_API_KEY")
+openai.api_key = os.getenv("OPEN_API_KEY")
 
 # Create a client instance (for SDK >= 1.0)
 client = openai.OpenAI()
