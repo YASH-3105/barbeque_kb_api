@@ -76,7 +76,6 @@
       border: 1px solid #ccc;
       padding: 10px;
     }
-
   </style>
 </head>
 <body>
@@ -99,60 +98,58 @@
 </div>
 
 <script>
-let sessionId = Math.random().toString(36).substring(2);
+  const sessionId = Math.random().toString(36).substring(2);
 
-function addMessage(text, sender) {
-  const msg = document.createElement("div");
-  msg.classList.add("chat-message", sender);
-  msg.innerText = text;
-  document.getElementById("chat-box").appendChild(msg);
-  document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
-}
+  function addMessage(text, sender) {
+    const msg = document.createElement("div");
+    msg.classList.add("chat-message", sender);
+    msg.innerText = text;
+    document.getElementById("chat-box").appendChild(msg);
+    document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
+  }
 
-function sendMessage() {
-  const input = document.getElementById("user-input");
-  const userText = input.value.trim();
-  if (!userText) return;
+  function sendMessage() {
+    const input = document.getElementById("user-input");
+    const userText = input.value.trim();
+    if (!userText) return;
 
-  addMessage(userText, "user");
-  input.value = "";
+    addMessage(userText, "user");
+    input.value = "";
 
-  fetch("/chatbot", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      session_id: sessionId,
-      user_input: userText
+    fetch("/chatbot", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        session_id: sessionId,
+        message: userText
+      })
     })
-  })
-  .then(res => res.json())
-  .then(data => {
-    const botReply = data.response || data.message || "No response.";
-    addMessage(botReply, "bot");
-  })
-  .catch(err => {
-    console.error(err);
-    addMessage("Error contacting chatbot.", "bot");
-  });
-}
-
-function toggleKB() {
-  const el = document.getElementById("kb-section");
-  el.style.display = el.style.display === "block" ? "none" : "block";
-}
-
-function loadKB() {
-  fetch("/kb/all")
     .then(res => res.json())
     .then(data => {
-      document.getElementById("kb-content").innerText = JSON.stringify(data, null, 2);
+      const botReply = data.response || data.error || "No response.";
+      addMessage(botReply, "bot");
     })
     .catch(err => {
-      document.getElementById("kb-content").innerText = "Failed to load KB.";
+      console.error(err);
+      addMessage("Error contacting chatbot.", "bot");
     });
-}
+  }
+
+  function toggleKB() {
+    const el = document.getElementById("kb-section");
+    el.style.display = el.style.display === "block" ? "none" : "block";
+  }
+
+  function loadKB() {
+    fetch("/kb/all")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("kb-content").innerText = JSON.stringify(data, null, 2);
+      })
+      .catch(err => {
+        document.getElementById("kb-content").innerText = "Failed to load KB.";
+      });
+  }
 </script>
 
 </body>

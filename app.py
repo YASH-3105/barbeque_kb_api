@@ -45,7 +45,7 @@ def update_session(session_id, state, variables):
 def chatbot():
     data = request.get_json()
     session_id = data.get("session_id")
-    user_input = data.get("user_input")
+    user_input = data.get("message")
 
     if not session_id or not user_input:
         return jsonify({"error": "session_id and user_input are required"}), 400
@@ -53,28 +53,36 @@ def chatbot():
     current_state = get_current_state(session_id)
     variables = sessions.get(session_id, {}).get("variables", {})
 
-    # Fill template based on state
-    if current_state in prompt_templates:
-        prompt_info = prompt_templates[current_state]
-        if current_state == "collect_contact_information":
-            filled_prompt = prompt_info["steps"][0]
-        elif current_state == "master_collect":
-            filled_prompt = prompt_info["prompt"].format(**variables)
-        elif current_state == "master_inform":
-            filled_prompt = prompt_info["template"].format(**variables)
-        elif current_state == "collect_city":
-            filled_prompt = prompt_info["instructions"]
-        else:
-            filled_prompt = "How can I help you?"
+    prompt_info = prompt_templates.get(current_state)
+    if not prompt_info:
+        filled_prompt = "Hello! How can I assist you today?"
     else:
-        filled_prompt = "Hello! How can I assist you?"
+        try:
+            if current_state == "collect_contact_information":
+                filled_prompt = prompt_info["steps"][0]
+            elif current_state == "master_collect":
+                filled_prompt = prompt_info["prompt"].format(**variables)
+            elif current_state == "master_inform":
+                filled_prompt = prompt_info["template"].format(**variables)
+            elif current_state == "collect_city":
+                filled_prompt = prompt_info["instructions"]
+            else:
+                filled_prompt = "How can I help you?"
+        except KeyError as e:
+            return jsonify({"error": f"Missing variable for prompt: {str(e)}"}), 500
 
-    # Get LLM response
-    llm_response = generate_response(filled_prompt)
+    # Generate LLM response
+    try:
+        llm_response = generate_response(filled_prompt)
+    except Exception as e:
+        return jsonify({"error": f"Failed to generate response: {str(e)}"}), 500
 
-    # Transition to next state
-    next_state = determine_next_state(current_state, user_input)
-    update_session(session_id, next_state, variables)
+    # Determine and update next state
+    try:
+        next_state = determine_next_state(current_state, user_input)
+        update_session(session_id, next_state, variables)
+    except Exception as e:
+        return jsonify({"error": f"State transition failed: {str(e)}"}), 500
 
     return jsonify({
         "response": llm_response,
