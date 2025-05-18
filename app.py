@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from prompt_templates import prompt_templates
 from state_transition import get_current_state, set_current_state, determine_next_state
 from entity_extraction import extract_entities
-from openai_utils import get_openai_response, generate_response
+from openai_utils import get_openai_response,  generate_response
 import json
 import os
 import re
