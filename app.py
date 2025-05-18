@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify, render_template
 from prompt_templates import prompt_templates
-from state_transition import get_current_state, get_next_state
+from state_transition import get_current_state, set_current_state, determine_next_state
 from entity_extraction import extract_entities
-from openai_utils import get_openai_response
+from openai_utils import get_openai_response, generate_response
 import json
 import os
 import re
@@ -60,7 +60,7 @@ def get_prompt():
     bot_response = get_openai_response(formatted_prompt)
 
     # Determine next state
-    next_state = get_next_state(session_id, current_state, extracted_entities)
+    next_state = determine_next_state(current_state, user_input)
 
     return jsonify({
         "bot_response": bot_response,
@@ -209,7 +209,7 @@ def chat_handler():
     collected_variables.update(new_entities)
 
     # Step 2: Decide the next state based on current state and extracted entities
-    next_state = get_next_state(current_state, user_input, collected_variables)
+    next_state = determine_next_state(current_state, user_input)
 
     # Step 3: Fetch prompt template and fill in variables
     if next_state not in prompt_templates:

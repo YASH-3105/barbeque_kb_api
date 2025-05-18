@@ -1,6 +1,6 @@
 # barbecue_kb_api/state_transition.py
 
-def determine_next_state(current_state, user_input, collected_entities):
+def determine_next_state(current_state, user_input):
     user_input = user_input.lower()
 
     if current_state == "collect_city":
@@ -17,3 +17,12 @@ def determine_next_state(current_state, user_input, collected_entities):
 
     # Add more rules as needed
     return current_state
+
+# Session tracking (simple in-memory dictionary)
+session_states = {}
+
+def get_current_state(session_id):
+    return session_states.get(session_id, "collect_city")  # default state
+
+def set_current_state(session_id, state):
+    session_states[session_id] = state
