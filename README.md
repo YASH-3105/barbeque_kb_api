@@ -71,7 +71,8 @@ Created prompt templates for each state to dynamically fill LLM inputs with user
 Logic defined in state_transition.py determines state shifts based on keyword presence and input structure.
 
 I have attach the image of conversation between client and server
-![Conversation Flow]("C:\Users\KIIT\Downloads\conversation_flow_test (1).png")
+![conversation_flow_test (1)](https://github.com/user-attachments/assets/0ee74c3b-b2a0-4b40-8675-44da80ba96eb)
+
 
 
 
