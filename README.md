@@ -97,6 +97,8 @@ curl -X POST http://localhost:5000/log_conversation \
 
 I have also attatched the screenshots of my work
 
+here's tthe link to the excel sheet : https://docs.google.com/spreadsheets/d/16dqa3hqc-bQWYx36XElAw9REy5aEyAV9-rFGiuAfypM/edit?gid=0#gid=0
+
 
 
 
