@@ -1,0 +1,242 @@
+ [
+ 
+   {
+    "id": "general_menu_veg_nonveg",
+    "city": "All",
+    "branch": "All",
+    "type": "menu",
+    "category": "general",
+    "content": "Barbeque Nation offers both veg and non-veg options.\n\nVeg Starters: Grill Veg, Mushroom, Paneer, Veg Kebab, Cajun Spice Potato, Pineapple.\n\nNon-Veg Starters: Chicken Tangdi, Chicken Skewer, Mutton, Fish, Prawns.\n\nVeg Main Course: Noodles, Oriental Veg, Paneer, Aloo, Veg Kofta, Veg Dry & Gravy, Dal Tadka, Dal Makhani, Veg Biryani.\n\nNon-Veg Main Course: Non-Veg Biryani, Mutton Curry, Chicken Curry, Fish Gravy.\n\nSoups: Veg Soup, Non-Veg Soup.\n\nSalads: 4 types of Veg Salads, plus Non-Veg Salad options.\n\nDesserts: Angoori Gulab Jamun, Phirnee, Ice Cream, Pie/Tart, Fruits, Pastry, Brownie, Pudding/Soufflé.",
+    "tokens": 145
+   },
+
+   {
+    "id": "bengaluru_jpnagar_branch_info",
+    "city": "Bengaluru",
+    "branch": "JP Nagar",
+    "type": "branch_info",
+    "content": "Barbeque Nation JP Nagar is located at 67, 3rd Floor, 6th B Main, Phase III, JP Nagar, Bengaluru, Karnataka 560078. Bar is available. Valet parking and parking assistance are available. Baby chairs are not available. Lift is available. PDR (Private Dining Room) is not available. Outlet contact numbers: 7090757107, 7353535557."
+   },
+  
+  
+   {
+    "id": "bengaluru_jpnagar_timings",
+    "city": "Bengaluru",
+    "branch": "JP Nagar",
+    "type": "timings",
+    "content": "Operating hours for Barbeque Nation JP Nagar:\n\nMonday to Friday:\nLunch: 12:00 PM – 5:00 PM (last entry 4:00 PM)\nDinner: 6:30 PM – 11:55 PM (last entry 11:00 PM)\n\nSaturday and Sunday:\nLunch: 12:00 PM – 5:00 PM (last entry 4:00 PM)\nDinner: 6:30 PM – 11:55 PM (last entry 11:00 PM)"
+   },
+  
+   {
+    "id": "bengaluru_jpnagar_booking_policy",
+    "city": "Bengaluru",
+    "branch": "JP Nagar",
+    "type": "booking_policy",
+    "content": "At Barbeque Nation JP Nagar, booking instructions for all days (Monday–Sunday) are:\n- For groups of 2+1 or 3 & above: flexible timings for lunch and dinner slots.\n- Last entry allowed till the end of each slot.\n\nNote: On 2nd October, the outlet is closed for Gandhi Jayanthi. Nearest outlets: Gopalan Mall JP Nagar (1.2 km) and Koramangala 7th Block (6.0 km)."
+   },
+  
+   {
+    "id": "bengaluru_jpnagar_offers",
+    "city": "Bengaluru",
+    "branch": "JP Nagar",
+    "type": "offers",
+    "content": "No active offers at Barbeque Nation JP Nagar. Early Bird, Kitty Party, Student, 5+1 Buffet, Army, and Drink offers are not applicable currently. Complimentary drink is provided during lunch (Monday to Saturday) – 1 round of soft drink. No active food festival."
+   },
+   {
+    "id": "delhi_vasant_kunj_branch_info",
+    "city": "New Delhi",
+    "branch": "Sector C, Vasant Kunj",
+    "type": "branch_info",
+    "content": "Barbeque Nation Vasant Kunj is located at Plot No. 11, Local Shopping Center, Pyramid Building, Pocket 7, Sector C, Vasant Kunj, New Delhi 110070. Bar is available. Parking assistance is not available. Lift and baby chair are not available. PDR (Private Dining Room) is not available. Outlet contact numbers: 9717455633, 9717466433, 7303094054."
+   },
+  
+  
+   {
+    "id": "delhi_vasant_kunj_timings",
+    "city": "New Delhi",
+    "branch": "Sector C, Vasant Kunj",
+    "type": "timings",
+    "content": "Barbeque Nation Vasant Kunj hours:\n\nMonday to Sunday:\nLunch: 12:00 PM – 5:00 PM (last entry 4:00 PM)\nDinner: 6:00 PM – 12:00 AM (last entry 11:00 PM)"
+   },
+  
+  
+   {
+    "id": "delhi_vasant_kunj_booking_policy",
+    "city": "New Delhi",
+    "branch": "Sector C, Vasant Kunj",
+    "type": "booking_policy",
+    "content": "All days follow the same booking rules: For 2+1 and 3+ pax groups, booking is flexible, and entries are allowed till the last entry for each slot. On 27th Oct, dinner slots are closed due to bulk booking. Suggested nearby outlet: New Friends Colony (13 km away)."
+   },
+  
+   {
+    "id": "delhi_vasant_kunj_offers",
+    "city": "New Delhi",
+    "branch": "Sector C, Vasant Kunj",
+    "type": "offers",
+    "content": "Current offers at Barbeque Nation Vasant Kunj:\n- Early Dinner Offer: Wed–Sun (6:00–6:30 PM)\n- Kitty Party & Student Offers: Available via tabs\n- 5+1 Buffet, Army, and Drink offers: Not available\n- Complimentary drink: 1 round soft drink or mocktail (Mon–Fri lunch only)"
+   },
+   {
+    "id": "general_menu_drinks_faq",
+    "city": "All",
+    "branch": "All",
+    "type": "faq",
+    "category": "menu_drinks",
+    "content": "Barbeque Nation FAQs - Menu & Drinks:\n\n1. Jain Food: Available with limited options. Inform outlet on arrival.\n2. Halal Food: Yes, all outlets serve Halal meat.\n3. Halal Certificate: Yes, available at all outlets.\n4. Menu Today: Refer to outlet-specific Altius/menu.\n5. Outside Drinks: Not allowed. In-house drinks available via à la carte.\n6. Drinks by Email: Yes. Use the app or provide your email.\n7. À la Carte Food: Only for delivery/takeaway. Dine-in is buffet.\n8. Dish Customization: Taste/spice can be adjusted. Extra dishes depend on branch availability.\n9. Menu Consistency: Yes, same across all outlets.\n10. Fish Type: Boneless BASA fish.\n11. Prawns Type: Medium-size Zinga prawns.\n12. Ice Cream Flavors: Vanilla and Strawberry.\n13. Kulfi Flavors: Strawberry, Malai, Chocolate, Kesar Badam, Paan, Mango.\n14. Lunch vs Dinner Menu: Same.\n15. Biryani Type: Chicken only. No mutton biryani.\n16. Alcoholic Drinks: Served as per à la carte (check outlet).\n17. Drinks Only: Not allowed. Meals required.\n18. Kulcha/Roti/Naan: Yes, served.\n19. Pizza: Not available.\n20. Hookah: Not available.\n21. Jataka Food: Not served.\n22. Mutton Starter: Mutton Seekh Kebab.\n23. Goat or Sheep: Goat is served.\n24. Crab: Not available. Only fish and prawns."
+   },
+   {
+    "id": "bengaluru_electronic_city_branch_info",
+    "city": "Bengaluru",
+    "branch": "Electronic City",
+    "type": "branch_info",
+    "content": "Barbeque Nation Electronic City is located at 99, 14th Cross Road, Neeladri Nagar, Electronics City Phase 1, Bengaluru, Karnataka 560100. Bar is not available. Parking is self-service or chargeable. Lift is available. Valet parking, baby chairs, and PDR (Private Dining Room) are not available. Outlet contact numbers: 7090757126, 7090757059."
+   },
+  
+   {
+    "id": "bengaluru_electronic_city_timings",
+    "city": "Bengaluru",
+    "branch": "Electronic City",
+    "type": "timings",
+    "content": "Barbeque Nation Electronic City operating hours:\n\nMonday to Sunday:\nLunch: 12:00 PM – 5:00 PM (last entry 4:00 PM)\nDinner: 6:30 PM – 11:55 PM (last entry 11:00 PM)"
+   },
+  
+   {
+    "id": "bengaluru_electronic_city_booking_policy",
+    "city": "Bengaluru",
+    "branch": "Electronic City",
+    "type": "booking_policy",
+    "content": "Booking policy for all days at Barbeque Nation Electronic City:\n- For groups of 2+1 or 3 & above: timings are flexible\n- All slots (Lunch Slot 1, Lunch Slot 2, Dinner Slot 1, Dinner Slot 2) allow entry until last slot closing\n- Applies uniformly from Monday to Sunday"
+   },
+  
+   {
+    "id": "bengaluru_electronic_city_offers",
+    "city": "Bengaluru",
+    "branch": "Electronic City",
+    "type": "offers",
+    "content": "There are currently no active offers at Barbeque Nation Electronic City. Early Bird, Kitty Party, Student, 5+1 Buffet, Army, and Drinks offers are not available. Complimentary drink (soft drink or mocktail) is offered during lunch from Monday to Saturday. No ongoing food festival."
+   },
+   {
+    "id": "delhi_cp_branch_info",
+    "city": "New Delhi",
+    "branch": "Connaught Place",
+    "type": "branch_info",
+    "content": "Barbeque Nation Connaught Place is located at Munshilal Building, 2nd Floor, N-19, Block N, Connaught Place, New Delhi 110001. Bar is available. Parking assistance is not available. Lift is available. PDR (Private Dining Room) is available with a capacity of 25 and a minimum requirement of 20 pax. Outlet numbers: 7042698057, 8130244992, 8470015488."
+   },
+  
+   {
+    "id": "delhi_cp_timings",
+    "city": "New Delhi",
+    "branch": "Connaught Place",
+    "type": "timings",
+    "content": "Barbeque Nation Connaught Place is open:\n\nMonday to Sunday:\nLunch: 12:00 PM – 5:00 PM (last entry 4:00 PM)\nDinner: 6:30 PM – 12:00 AM (last entry 11:00 PM)"
+   },
+  
+   {
+    "id": "delhi_cp_booking_policy",
+    "city": "New Delhi",
+    "branch": "Connaught Place",
+    "type": "booking_policy",
+    "content": "Booking instructions for Barbeque Nation Connaught Place:\n\nMonday–Thursday:\nAll groups (2+1 and 3+) have flexible lunch and dinner bookings, with Dinner Slot-1 ending at 7:00 PM.\n\nFriday–Sunday:\nLunch Slot-1 closes at 12:30 PM. Dinner Slot-1 still ends at 7:00 PM. All other slots allow last entry.\n\nNearby outlet suggestion: New Friends Colony, 13 km away."
+   },
+  
+  
+   {
+    "id": "delhi_cp_offers",
+    "city": "New Delhi",
+    "branch": "Connaught Place",
+    "type": "offers",
+    "content": "Barbeque Nation Connaught Place currently has no ongoing offers. Early Bird, Kitty Party, Student, 5+1 Buffet, Army, and Drink offers are not available. Complimentary 1-round soft drink or mocktail is available during lunch (Monday to Friday)."
+   },
+   {
+    "id": "bengaluru_koramangala1_branch_info",
+    "city": "Bengaluru",
+    "branch": "Koramangala 1st Block",
+    "type": "branch_info",
+    "content": "Barbeque Nation Koramangala 1st Block is located at 1st Cross Rd, 1st Block, Koramangala, Bengaluru, Karnataka 560034. Bar and lift are available. Parking assistance is available. Baby chair and PDR (Private Dining Room) are not available. Contact numbers: 9071399811, 9071399812, 9071772467."
+   },
+  
+   {
+    "id": "bengaluru_koramangala1_timings",
+    "city": "Bengaluru",
+    "branch": "Koramangala 1st Block",
+    "type": "timings",
+    "content": "Operating hours at Barbeque Nation Koramangala 1st Block:\n\nMonday to Friday:\nLunch: 12:00 PM – 5:00 PM (last entry 4:00 PM)\nDinner: 6:30 PM – 11:30 PM (last entry 10:30 PM)\n\nSaturday & Sunday:\nLunch: 12:00 PM – 5:00 PM (last entry 4:00 PM)\nDinner: 6:30 PM – 11:55 PM (last entry 11:00 PM)"
+   },
+  
+   {
+    "id": "bengaluru_koramangala1_booking_policy",
+    "city": "Bengaluru",
+    "branch": "Koramangala 1st Block",
+    "type": "booking_policy",
+    "content": "Booking at Barbeque Nation Koramangala 1st Block is flexible for all groups (2+1 and 3+ pax) every day. All lunch and dinner slots accept entries till the last entry time. Note: The outlet is closed on 2nd October due to Gandhi Jayanthi. Nearby outlets: Koramangala 7th Block (3.7 km), Indiranagar (5.9 km)."
+   },
+  
+   {
+    "id": "bengaluru_koramangala1_offers",
+    "city": "Bengaluru",
+    "branch": "Koramangala 1st Block",
+    "type": "offers",
+    "content": "There are no active offers at Barbeque Nation Koramangala 1st Block. Early Bird, Kitty Party, Student, 5+1 Buffet, Army, and Drinks offers are not available. A complimentary drink (soft drink or mocktail) is served with lunch from Monday to Saturday. No food festival is ongoing."
+   },
+   {
+    "id": "delhi_janakpuri_branch_info",
+    "city": "New Delhi",
+    "branch": "Unity Mall, Janakpuri",
+    "type": "branch_info",
+    "content": "Barbeque Nation Unity Mall, Janakpuri is located at Unity One, 2nd Floor, Narang Colony, Chander Nagar, Janakpuri, New Delhi 110058. Bar is available. Parking is self/mall managed and chargeable. Lift is available. Baby chair and PDR (Private Dining Room) are not available. Outlet contact numbers: 9810445315, 9311177719, 7827935431."
+   },
+  
+   {
+    "id": "delhi_janakpuri_timings",
+    "city": "New Delhi",
+    "branch": "Unity Mall, Janakpuri",
+    "type": "timings",
+    "content": "Barbeque Nation Janakpuri operating hours:\n\nMonday to Sunday:\nLunch: 12:00 PM – 5:00 PM (last entry 4:00 PM)\nDinner: 6:00 PM – 12:00 AM (last entry 11:00 PM)"
+   },
+  
+   {
+    "id": "delhi_janakpuri_booking_policy",
+    "city": "New Delhi",
+    "branch": "Unity Mall, Janakpuri",
+    "type": "booking_policy",
+    "content": "Booking is flexible for all pax sizes (2+1 and 3+) across lunch and dinner slots. All slots accept guests till last entry. Note: On 14th March 2025, lunch is closed due to Holi. Suggest booking dinner. Nearby outlets: Rajouri Garden (6.3 km) and Paschim Vihar (7.8 km)."
+   },
+  
+   {
+    "id": "delhi_janakpuri_offers",
+    "city": "New Delhi",
+    "branch": "Unity Mall, Janakpuri",
+    "type": "offers",
+    "content": "Offers at Barbeque Nation Janakpuri:\n- Early Bird: Not available\n- Kitty Party Offer: Refer to Kitty Offer tab\n- Student Offer: Refer to Student Offer tab\n- 5+1 Buffet, Army, and Drinks offers: Not available\n- Complimentary drink: 1 round (soft drink or mocktail) served during lunch Monday–Friday\n- No ongoing food festival"
+   },
+   {
+    "id": "bengaluru_indiranagar_branch_info",
+    "city": "Bengaluru",
+    "branch": "Indiranagar",
+    "type": "branch_info",
+    "content": "Barbeque Nation Indiranagar is located at No.4005, HAL 2nd stage, 100 feet road, Indiranagar, Bengaluru 560038. Bar, valet parking, baby chair, and lift are available. PDR (Private Dining Room) is not available. Outlet contact numbers: 7892263996, 7090757068."
+   },
+  
+   {
+    "id": "bengaluru_indiranagar_timings",
+    "city": "Bengaluru",
+    "branch": "Indiranagar",
+    "type": "timings",
+    "content": "Operating hours at Barbeque Nation Indiranagar:\n\nMonday to Saturday:\nLunch: 12:00 PM – 5:00 PM (last entry 4:00 PM)\nDinner: 6:30 PM – 11:55 PM (last entry 11:00 PM)\n\nSunday:\nLunch: 11:00 AM – 5:00 PM (last entry 4:00 PM)\nDinner: 6:30 PM – 11:55 PM (last entry 11:00 PM)"
+   },
+  
+   {
+    "id": "bengaluru_indiranagar_booking_policy",
+    "city": "Bengaluru",
+    "branch": "Indiranagar",
+    "type": "booking_policy",
+    "content": "At Barbeque Nation Indiranagar, all days follow a flexible policy for both 2+1 and 3+ pax groups across all slots (Lunch Slot-1, Lunch Slot-2, Dinner Slot-1, Dinner Slot-2). Entry is allowed till the end of each slot. Note: Closed on 2nd October due to Gandhi Jayanthi. Nearby outlets: Lido Mall MG Road (4.1 km), Koramangala 7th Block (5.8 km)."
+   },
+  
+   {
+    "id": "bengaluru_indiranagar_offers",
+    "city": "Bengaluru",
+    "branch": "Indiranagar",
+    "type": "offers",
+    "content": "There are no current offers at Barbeque Nation Indiranagar. Early Bird, Kitty Party, Student, 5+1 Buffet, Army, and Drinks offers are not applicable. A complimentary drink (soft drink or mocktail) is served during lunch from Monday to Saturday. No food festival is currently running."
+   }
+]  
