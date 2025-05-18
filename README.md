@@ -70,6 +70,9 @@ Created prompt templates for each state to dynamically fill LLM inputs with user
 
 Logic defined in state_transition.py determines state shifts based on keyword presence and input structure.
 
+I have attach the image of conversation between client and server
+conversation_flow_test(1).png
+
 
 
 ---
