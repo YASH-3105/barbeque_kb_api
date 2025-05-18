@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify, render_template
 from prompt_templates import prompt_templates
+from state_transition import get_current_state, get_next_state
+from entity_extraction import extract_entities
+from openai_utils import get_openai_response
 import json
 import os
 import re
@@ -28,31 +31,41 @@ app = Flask(__name__)
 @app.route("/get_prompt", methods=["POST"])
 def get_prompt():
     data = request.json
-    state = data.get("state")
-    variables = data.get("variables", {})
+    session_id = data.get("session_id")
+    user_input = data.get("user_input")
 
-    if state not in prompt_templates:
-        return jsonify({"error": "Invalid state"}), 400
+    current_state = get_current_state(session_id)
+    template = prompt_templates.get(current_state)
 
-    prompt_data = prompt_templates[state]
+    if not template:
+        return jsonify({"error": "Invalid conversation state"}), 400
 
-    # Fill in dynamic fields if needed
-    if state == "collect_contact_information":
-        step = prompt_data["steps"][0]
-        return jsonify({"prompt": step})
-    
-    elif state == "master_collect":
-        prompt = prompt_data["prompt"].format(**variables)
-        return jsonify({"prompt": prompt})
-    
-    elif state == "master_inform":
-        template = prompt_data["template"].format(**variables)
-        return jsonify({"prompt": template})
+    # Extract entities
+    extracted_entities = extract_entities(user_input, current_state)
 
-    elif state == "collect_city":
-        return jsonify({"prompt": prompt_data["instructions"]})
+    # Prepare variables for prompt
+    formatted_prompt = ""
+    if current_state == "collect_contact_information":
+        formatted_prompt = template["steps"][0]
+    elif current_state == "master_collect":
+        formatted_prompt = template["prompt"].format(**extracted_entities)
+    elif current_state == "master_inform":
+        formatted_prompt = template["template"].format(**extracted_entities)
+    elif current_state == "collect_city":
+        formatted_prompt = template["instructions"]
+    else:
+        formatted_prompt = "Unknown state logic"
 
-    return jsonify({"prompt": "Unknown state logic"}), 500
+    # Get OpenAI response
+    bot_response = get_openai_response(formatted_prompt)
+
+    # Determine next state
+    next_state = get_next_state(session_id, current_state, extracted_entities)
+
+    return jsonify({
+        "bot_response": bot_response,
+        "next_state": next_state
+    })
 
 @app.route("/")
 def home():
@@ -180,6 +193,46 @@ def fallback_response():
 
 
 print(app.url_map)
+
+@app.route("/chat", methods=["POST"])
+def chat_handler():
+    data = request.get_json()
+    user_input = data.get("query", "")
+    current_state = data.get("state", "")
+    collected_variables = data.get("variables", {})
+
+    if not current_state:
+        return jsonify({"error": "Current state is required"}), 400
+
+    # Step 1: Extract new entities from user input
+    new_entities = extract_entities(user_input, current_state)
+    collected_variables.update(new_entities)
+
+    # Step 2: Decide the next state based on current state and extracted entities
+    next_state = get_next_state(current_state, user_input, collected_variables)
+
+    # Step 3: Fetch prompt template and fill in variables
+    if next_state not in prompt_templates:
+        return jsonify({"error": f"Unknown next state: {next_state}"}), 500
+
+    prompt_data = prompt_templates[next_state]
+    if next_state == "master_collect":
+        filled_prompt = prompt_data["prompt"].format(**collected_variables)
+    elif next_state == "master_inform":
+        filled_prompt = prompt_data["template"].format(**collected_variables)
+    else:
+        # For simple prompt types (like single instruction)
+        filled_prompt = prompt_data.get("instructions") or prompt_data.get("steps", [""])[0]
+
+    # Step 4: Optionally generate LLM response
+    llm_response = generate_response(filled_prompt)
+
+    return jsonify({
+        "next_state": next_state,
+        "variables": collected_variables,
+        "prompt": filled_prompt,
+        "response": llm_response
+    }), 200
 
 
 
