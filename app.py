@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import json
 import os
 import re
@@ -147,6 +147,10 @@ def home():
     return "Knowledge Base API is running."
 
 print(app.url_map)
+
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 if __name__ == "__main__":
     print(">>> Flask App is launching")
