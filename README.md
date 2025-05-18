@@ -122,4 +122,3 @@ Toggle to review current knowledge base chunks
 here is my deployed link
 https://barbeque-kb-api.onrender.com
 
-I have also done the post call analysis using the service account and enabling the APi and tested it by entering the prompt of curl and then it uploaded in excel sheet
