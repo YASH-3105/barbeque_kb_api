@@ -1,18 +1,16 @@
-import openai
 import os
+from openai import OpenAI
 
-openai.api_key = os.getenv("OPEN_API_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# Create a client instance (for SDK >= 1.0)
-client = openai.OpenAI()
-
-def get_openai_response(messages, model="gpt-3.5-turbo"):
-    response = client.chat.completions.create(
-        model=model,
-        messages=messages
-    )
-    return response.choices[0].message.content
-
-def generate_response(prompt, model="gpt-3.5-turbo"):
-    messages = [{"role": "user", "content": prompt}]
-    return get_openai_response(messages, model=model)
+def generate_response(prompt):
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.7
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        print(f"Error generating response: {e}")
+        return "Failed to generate response."
